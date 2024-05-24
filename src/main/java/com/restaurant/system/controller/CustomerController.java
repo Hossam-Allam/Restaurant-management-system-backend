@@ -45,7 +45,7 @@ public class CustomerController {
     @PutMapping("/newnumber")
     public String updatePhone(@RequestParam int id, @RequestParam long phoneno){
         customerService.newNumber(id, phoneno);
-        return "number updatedd";
+        return "number updated";
     }
 
 }
