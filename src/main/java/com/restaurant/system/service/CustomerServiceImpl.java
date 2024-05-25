@@ -29,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
     public LoginResponse authenticateCustomer(String username, String password) {
         Customer customer = customerRepository.findByUsername(username);
         if (customer != null && customer.getPassword().equals(password)) {
-            return new LoginResponse(true, customer.getId());
+            return new LoginResponse(true, customer.getId(), username, customer.getAddress(), customer.getPhoneno());
         }
         return new LoginResponse(false, null);
     }
