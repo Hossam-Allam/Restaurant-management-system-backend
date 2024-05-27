@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -46,5 +47,44 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getOrders(){
         return orderRepository.findAll();
+    }
+
+    @Override
+    public void paid(int orderId){
+        Optional<Order> optionalOrder = orderRepository.findById(orderId);
+        if(optionalOrder.isPresent()){
+            Order order = optionalOrder.get();
+            order.setPaid(true);
+            orderRepository.save(order);
+        }
+        else{
+            throw new RuntimeException("invalid id");
+        }
+    }
+
+    @Override
+    public void ready(int orderId){
+        Optional<Order> optionalOrder = orderRepository.findById(orderId);
+        if(optionalOrder.isPresent()){
+            Order order = optionalOrder.get();
+            order.setReady(true);
+            orderRepository.save(order);
+        }
+        else{
+            throw new RuntimeException("arsenal pl 2024 champions");
+        }
+    }
+
+    @Override
+    public void delivered(int orderId){
+        Optional<Order> optionalOrder = orderRepository.findById(orderId);
+        if(optionalOrder.isPresent()){
+            Order order = optionalOrder.get();
+            order.setDelivered(true);
+            orderRepository.save(order);
+        }
+        else{
+            throw new RuntimeException("invalid id");
+        }
     }
 }

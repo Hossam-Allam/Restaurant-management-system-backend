@@ -10,4 +10,10 @@ public interface OrderService {
     public Order saveOrder(Order order);
 
     public List<Order> getOrders();
+
+    public void paid(int orderId);
+
+    public void ready(int orderId);
+
+    public void delivered(int orderId);
 }

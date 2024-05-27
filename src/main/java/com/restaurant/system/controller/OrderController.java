@@ -26,4 +26,22 @@ public class OrderController {
     public List<Order> allOrders(){
         return orderService.getOrders();
     }
+
+    @PutMapping("/paid")
+    public String customerPaid(int orderId){
+        orderService.paid(orderId);
+        return "Order dues paid";
+    }
+
+    @PutMapping("/ready")
+    public String orderReady(int orderId){
+        orderService.ready(orderId);
+        return "order ready";
+    }
+
+    @PutMapping("/deliver")
+    public String orderDelivered(int orderId){
+        orderService.delivered(orderId);
+        return "delivered";
+    }
 }
