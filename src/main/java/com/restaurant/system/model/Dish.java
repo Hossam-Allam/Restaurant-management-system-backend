@@ -1,6 +1,7 @@
 package com.restaurant.system.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -15,17 +16,19 @@ public class Dish {
 
     private String name;
     private double price;
+    private String category;
 
     @ManyToMany(mappedBy = "dishes")
-    @JsonBackReference
+    @JsonIgnore
     private Set<Order> orders;
 
     public Dish() {
     }
 
-    public Dish(String name, double price) {
+    public Dish(String name, double price, String category) {
         this.price = price;
         this.name = name;
+        this.category = category;
     }
 
     public Set<Order> getOrders() {
@@ -58,5 +61,13 @@ public class Dish {
 
     public void setDishId(int dishId) {
         this.dishId = dishId;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

@@ -4,6 +4,7 @@ import com.restaurant.system.model.Dish;
 import com.restaurant.system.service.DishService;
 import com.restaurant.system.service.DishServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,12 @@ public class DishController {
         return dishService.allDishes();
     }
 
+    @GetMapping("/category/{category}")
+    public ResponseEntity<List<Dish>> getDishesByCategory(@PathVariable String category) {
+        List<Dish> dishes = dishService.returnByCategory(category);
+        return ResponseEntity.ok(dishes);
+    }
+
     @PutMapping("/price")
     private String priceUpdate(@RequestParam int dishId, @RequestParam double price) {
 
@@ -34,5 +41,11 @@ public class DishController {
         } else {
             return "Dish not found";
         }
+    }
+
+    @PostMapping("/newdish")
+    private String newDish(@RequestBody Dish dish){
+        dishServiceImpl.addDish(dish);
+        return "Dish added";
     }
 }

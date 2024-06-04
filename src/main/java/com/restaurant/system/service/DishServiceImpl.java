@@ -32,8 +32,18 @@ public class DishServiceImpl implements DishService {
         }
     }
 
+    @Override
+    public void addDish(Dish dish){
+        dishRepository.save(dish);
+    }
+
     public Dish findDishById(int dishId) {
         return dishRepository.findById(dishId).orElse(null);
+    }
+
+    @Override
+    public List<Dish> returnByCategory(String category) {
+        return dishRepository.findByCategory(category);
     }
 
 }

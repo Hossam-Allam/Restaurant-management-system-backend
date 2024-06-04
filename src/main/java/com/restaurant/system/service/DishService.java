@@ -9,4 +9,8 @@ public interface DishService {
     public List<Dish> allDishes();
 
     public void newPrice(int dishId, double price);
+
+    public void addDish(Dish dish);
+
+    public List<Dish> returnByCategory(String category);
 }
