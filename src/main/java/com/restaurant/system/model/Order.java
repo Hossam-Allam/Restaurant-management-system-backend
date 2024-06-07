@@ -1,9 +1,13 @@
 package com.restaurant.system.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -27,8 +31,7 @@ public class Order {
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "dish_id")
     )
-    @JsonManagedReference
-    private Set<Dish> dishes;
+    private Set<Dish> dishes = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)

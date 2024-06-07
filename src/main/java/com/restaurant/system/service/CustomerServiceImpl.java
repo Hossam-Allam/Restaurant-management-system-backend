@@ -6,6 +6,7 @@ import com.restaurant.system.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,6 +59,19 @@ public class CustomerServiceImpl implements CustomerService {
         }
         else{
             throw new RuntimeException("invalid operation");
+        }
+    }
+
+    @Override
+    public void newPassword(int id, String password){
+        Optional<Customer> optionalCustomer = customerRepository.findById(id);
+        if(optionalCustomer.isPresent()){
+            Customer customer = optionalCustomer.get();
+            customer.setPassword(password);
+            customerRepository.save(customer);
+        }
+        else{
+            throw new RuntimeException("something went wrong");
         }
     }
 }

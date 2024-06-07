@@ -10,6 +10,7 @@ import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -33,6 +34,11 @@ public class OrderServiceImpl implements OrderService {
         Customer customer = customerRepository.findById(order.getCustomer().getId())
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
         order.setCustomer(customer);
+
+        // Initialize dishes if null
+        if (order.getDishes() == null) {
+            order.setDishes(new HashSet<>());
+        }
 
         // Fetch and set the dishes
         Set<Dish> dishes = order.getDishes().stream()
@@ -71,7 +77,7 @@ public class OrderServiceImpl implements OrderService {
             orderRepository.save(order);
         }
         else{
-            throw new RuntimeException("arsenal pl 2024 champions");
+            throw new RuntimeException("arsenal pl 2025 champions");
         }
     }
 

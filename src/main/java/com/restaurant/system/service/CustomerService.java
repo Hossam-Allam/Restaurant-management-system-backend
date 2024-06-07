@@ -16,5 +16,7 @@ public interface CustomerService {
     public void newAddress(int id, String address);
 
     public void newNumber(int id, long phoneno);
+
+    public void newPassword(int id, String password);
 }
 

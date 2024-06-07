@@ -48,4 +48,10 @@ public class CustomerController {
         return "number updated";
     }
 
+    @PutMapping("/newpass")
+    public String updatePassword(@RequestParam int id, @RequestParam String password){
+        customerService.newPassword(id, password);
+        return "password updated";
+    }
+
 }
